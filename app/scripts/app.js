@@ -13,7 +13,8 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    'ui.router'
   ])
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
