@@ -17,10 +17,7 @@ angular.module('ajinkyaNgAppApp')
       AuthService.login(credentials).then(function (user) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $scope.setCurrentUser(user);
-        if (AuthService.isAuthenticated()) {
-          $location.path('/dashboard');
-          $scope.$apply();
-        };
+        
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });

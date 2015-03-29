@@ -29,7 +29,7 @@ angular.module('ajinkyaNgAppApp')
         authorizedRoles = [authorizedRoles];
       }
       return (authService.isAuthenticated() &&
-        authorizedRoles.indexOf(Session.userRole) !== -1);
+        authorizedRoles.indexOf(Session.user.userRole) !== -1);
     };
    
     return authService;

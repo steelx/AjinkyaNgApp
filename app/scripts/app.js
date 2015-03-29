@@ -41,13 +41,31 @@ angular
         templateUrl: 'views/loginform.html',
         controller: 'LoginController'
       })
-      .when('/dashboard', {
-        templateUrl: 'views/dashboard.html'
-        // data: {
-        //   authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-        // }
-      })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .config(function ($stateProvider, USER_ROLES) {
+    $stateProvider.state('dashboard', {
+      url: '/dashboard',
+      templateUrl: 'dashboard.html',
+      data: {
+        authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+      }
+    });
+  })
+  .run(function ($rootScope, AUTH_EVENTS, AuthService) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      var authorizedRoles = next.data.authorizedRoles;
+      if (!AuthService.isAuthorized(authorizedRoles)) {
+        event.preventDefault();
+        if (AuthService.isAuthenticated()) {
+          // user is not allowed
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        } else {
+          // user is not logged in
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        }
+      }
+    });
+  })
