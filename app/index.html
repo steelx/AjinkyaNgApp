@@ -47,13 +47,18 @@
         </div>
       </div>
     </div>
-
+{{'role' + currentUser.role}}
     <div class="container">
     <div ng-view=""></div>
     </div>
 
     <div class="footer">
       <div class="container">
+        <div ng-switch on="currentUser.role">
+          <div ng-switch-when="userRoles.admin">You're admin.</div>
+          <div ng-switch-when="userRoles.editor">You're editor.</div>
+          <div ng-switch-default>You're something else.</div>
+        </div>
         <p><span class="glyphicon glyphicon-heart"></span> www.AjinkyaxJs.com</p>
       </div>
     </div>

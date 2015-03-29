@@ -12,8 +12,9 @@ angular.module('ajinkyaNgAppApp')
     $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = AuthService.isAuthorized;
-   
+
     $scope.setCurrentUser = function (user) {
+      console.log(user);
       $scope.currentUser = user;
     };
     //console.log($scope.currentUser);

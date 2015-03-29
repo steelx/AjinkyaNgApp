@@ -10,20 +10,17 @@
 angular.module('ajinkyaNgAppApp')
   .service('Session', function ($window) {
     this.create = function (sessionId, loginSucceeded, userRole) {
-      this.user = {
-        id : sessionId,
-        loginSucceeded: loginSucceeded,
-        userRole : userRole
-      };
-
-      $window.sessionStorage.setItem('user', JSON.stringify(this.user))
+      this.id = sessionId;
+      this.userId = sessionId;
+      this.userRole = userRole;
+      this.loginSucceeded = loginSucceeded;
+      $window.sessionStorage.setItem('user', this.userId)
     };
     this.destroy = function () {
-      this.user = {
-        id : null,
-        loginSucceeded: null,
-        userRole : null
-      };
+      this.id = null;
+      this.userId = null;
+      this.userRole = null;
+      this.loginSucceeded = null;
 
       $window.sessionStorage.removeItem('user');
     };

@@ -15,13 +15,15 @@ angular.module('ajinkyaNgAppApp')
       return $.post('http://localhost:8080/login', credentials)
         .then(function (res) {
           Session.create(res.sessionId, res.loginSucceeded, 'editor');
-          return res;
+          var userRole  = { role: 'editor'};
+          
+          return jQuery.extend(res, userRole);;
         });
     };
    
     authService.isAuthenticated = function () {
       //console.log(Session);
-      return Session.user.loginSucceeded;
+      return Session.loginSucceeded;
     };
    
     authService.isAuthorized = function (authorizedRoles) {
@@ -29,7 +31,7 @@ angular.module('ajinkyaNgAppApp')
         authorizedRoles = [authorizedRoles];
       }
       return (authService.isAuthenticated() &&
-        authorizedRoles.indexOf(Session.user.userRole) !== -1);
+        authorizedRoles.indexOf(Session.userRole) !== -1);
     };
    
     return authService;
