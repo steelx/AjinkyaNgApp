@@ -41,6 +41,10 @@ angular
         templateUrl: 'views/loginform.html',
         controller: 'LoginController'
       })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardController'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -52,7 +56,7 @@ angular
       data: {
         authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
       }
-    });
+    })
   })
   .run(function ($rootScope, AUTH_EVENTS, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {

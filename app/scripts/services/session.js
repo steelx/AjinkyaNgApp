@@ -14,7 +14,6 @@ angular.module('ajinkyaNgAppApp')
       this.userId = sessionId;
       this.userRole = userRole;
       this.loginSucceeded = loginSucceeded;
-      $window.sessionStorage.setItem('user', this.userId)
     };
     this.destroy = function () {
       this.id = null;

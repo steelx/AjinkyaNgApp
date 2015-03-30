@@ -16,8 +16,15 @@ angular.module('ajinkyaNgAppApp')
     $scope.login = function (credentials) {
       AuthService.login(credentials).then(function (user) {
 				//user =  {sessionId: "zcsd", loginSucceeded: true, userRole: "editor"}
-        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $scope.setCurrentUser(user);
+        if(user){
+          $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+          $scope.setCurrentUser(user);
+          $location.path('/dashboard');
+          $scope.$apply();
+        } else {
+          $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+          console.log('no good');
+        }
 
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);

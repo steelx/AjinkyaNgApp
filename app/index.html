@@ -41,7 +41,8 @@
 
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/login">Login</a></li>
+              <li ng-hide="$root.currentUser.loginSucceeded"><a ng-href="#/login">Login</a></li>
+              <li ng-show="$root.currentUser.loginSucceeded"><a ng-href="#/logout">Logout</a></li>
             </ul>
           </div>
         </div>

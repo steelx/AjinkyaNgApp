@@ -8,10 +8,8 @@
  * Controller of the ajinkyaNgAppApp
  */
 angular.module('ajinkyaNgAppApp')
-  .controller('DashboardController', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('DashboardController', function ($scope, AuthService) {
+    if (AuthService.isAuthenticated()) {
+    	alert('true');
+    };
   });

@@ -17,7 +17,9 @@ angular.module('ajinkyaNgAppApp')
           Session.create(res.sessionId, res.loginSucceeded, 'editor');
           var userRole  = { role: 'editor'};
           
-          return jQuery.extend(res, userRole);;
+          return (res.loginSucceeded)? jQuery.extend(res, userRole) : false;
+        },function (err, status) {
+          console.log(err);
         });
     };
    
@@ -33,6 +35,6 @@ angular.module('ajinkyaNgAppApp')
       return (authService.isAuthenticated() &&
         authorizedRoles.indexOf(Session.userRole) !== -1);
     };
-   
+
     return authService;
   });
